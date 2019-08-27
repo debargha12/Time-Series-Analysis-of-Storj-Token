@@ -84,7 +84,7 @@ forecastR <- regressionF+residualsF
 print(forecastR)
 
 Mapetbats =c()
-Mapearima =[]
+
 for (i in 1:20)
 { nTest <- 14*i  
 nTrain <- length(msts)- nTest 
@@ -102,14 +102,20 @@ Training Set includes",nTrain," time periods. Observations 1 to", nTrain, "
 Test Set includes 14 time periods. Observations", nTrain+1, "to", nTrain+14,"
       
 ")
-print(accuracy(sp,test)[6])
-Mapetbats<- c(Mapetbats,accuracy(sp,test)[5])
+print(accuracy(sp,test))
+Mapetbats<- c(Mapetbats,accuracy(sp,test)[10])
+
 cat("
       
       ")
-print(sp$model)
+print(sp$model,"----")
 }
+print(Mapetbats)
 
+
+
+
+Mapearima =c()
 for (i in 1:20)
 {
   nTest <- 14*i  
@@ -137,6 +143,7 @@ Test Set includes 14 time periods. Observations", nTrain+1, "to", nTrain+14,"
 ")
   
   print(accuracy(sp,test))
+  Mapearima<- c(Mapearima,accuracy(sp,test)[5])
   print(residauto)
   
   cat("
@@ -144,3 +151,7 @@ Test Set includes 14 time periods. Observations", nTrain+1, "to", nTrain+14,"
     ")
   
 }
+print(Mapearima)
+
+#Overall the Mean Mape Value FOR Tbats is less than the mean Mape Value for Arima over 20 iterations. It indiacates that Tbats produces a good Forecast while Arima produces a Reasonable Forecast.
+
